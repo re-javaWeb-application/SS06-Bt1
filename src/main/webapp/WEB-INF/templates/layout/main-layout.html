@@ -16,10 +16,10 @@
     </header>
 
     <nav class="navbar">
-        <a th:href="@{/course/list}" th:classappend="${#httpServletRequest.requestURI == '/course/list' ? ' active' : ''}">
+        <a th:href="@{/course/list}" th:classappend="${activeMenu == 'courses' ? ' active' : ''}">
             Danh sach khoa hoc
         </a>
-        <a th:href="@{/consultation}" th:classappend="${#httpServletRequest.requestURI == '/consultation' ? ' active' : ''}">
+        <a th:href="@{/consultation}" th:classappend="${activeMenu == 'consultation' ? ' active' : ''}">
             Dang ky tu van
         </a>
     </nav>

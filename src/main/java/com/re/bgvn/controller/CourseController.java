@@ -25,9 +25,14 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    @ModelAttribute("activeMenu")
+    public String activeMenu() {
+        return "courses";
+    }
+
     @GetMapping("/list")
-    public String listCourses(@RequestParam(defaultValue = "") String level,
-                              @RequestParam(defaultValue = "999999999") BigDecimal maxFee,
+    public String listCourses(@RequestParam(name = "level", defaultValue = "") String level,
+                              @RequestParam(name = "maxFee", defaultValue = "999999999") BigDecimal maxFee,
                               Model model) {
         List<Course> courses = courseService.searchCourses(level, maxFee);
         model.addAttribute("courses", courses);
@@ -38,7 +43,7 @@ public class CourseController {
     }
 
     @GetMapping("/detail/{code}")
-    public String courseDetail(@PathVariable String code, Model model, RedirectAttributes redirectAttributes) {
+    public String courseDetail(@PathVariable("code") String code, Model model, RedirectAttributes redirectAttributes) {
         try {
             model.addAttribute("course", courseService.getCourseByCode(code));
             model.addAttribute("pageTitle", "Chi tiet khoa hoc");
@@ -50,7 +55,7 @@ public class CourseController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editCourse(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+    public String editCourse(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
         try {
             model.addAttribute("course", courseService.getCourseById(id));
             model.addAttribute("pageTitle", "Cap nhat khoa hoc");
@@ -71,7 +76,7 @@ public class CourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteCourse(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    public String deleteCourse(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         try {
             courseService.deleteCourse(id);
             redirectAttributes.addFlashAttribute("successMessage", "Huy khoa hoc thanh cong");
