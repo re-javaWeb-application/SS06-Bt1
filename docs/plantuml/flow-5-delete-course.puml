@@ -1,0 +1,28 @@
+@startuml
+title Luong 5 - Huy khoa hoc theo dieu kien nghiep vu
+
+participant "Nhan vien hoc vu" as User
+participant "Course List View" as View
+participant "CourseController" as Ctrl
+participant "CourseService" as Svc
+participant "CourseRepository" as Repo
+
+User -> View : Bam "Huy khoa hoc"
+View -> Ctrl : POST /course/delete/{id}
+Ctrl -> Svc : deleteCourse(id)
+Svc -> Repo : findById(id)
+Repo --> Svc : Course
+
+alt studentCount = 0
+    Svc -> Repo : deleteById(id)
+    Repo --> Svc : Da xoa
+    Svc --> Ctrl : Thanh cong
+    Ctrl --> View : redirect:/course/list + successMessage
+else studentCount > 0
+    Svc --> Ctrl : IllegalStateException
+    Ctrl --> View : redirect:/course/list + errorMessage
+end
+
+View --> User : Hien thi thong bao ket qua
+
+@enduml

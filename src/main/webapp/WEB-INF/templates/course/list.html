@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<body>
+<section layout:fragment="content" class="content-stack">
+    <div class="page-heading">
+        <div>
+            <h1>Danh sach khoa hoc</h1>
+            <p>Theo doi tinh trang lop, hoc phi va lich khai giang trong mot man hinh.</p>
+        </div>
+    </div>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+
+    <form class="filter-panel" th:action="@{/course/list}" method="get">
+        <div class="field">
+            <label for="level">Level</label>
+            <select id="level" name="level">
+                <option value="" th:selected="${selectedLevel == null or selectedLevel == ''}">Tat ca</option>
+                <option value="Beginner" th:selected="${selectedLevel == 'Beginner'}">Beginner</option>
+                <option value="Intermediate" th:selected="${selectedLevel == 'Intermediate'}">Intermediate</option>
+                <option value="Advanced" th:selected="${selectedLevel == 'Advanced'}">Advanced</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="maxFee">Hoc phi toi da</label>
+            <input id="maxFee" name="maxFee" type="number" min="0" step="100000" th:value="${maxFee}">
+        </div>
+        <div class="field action-field">
+            <button type="submit">Tra cuu</button>
+        </div>
+    </form>
+
+    <div th:if="${#lists.isEmpty(courses)}" class="empty-state">
+        Hien chua co lop hoc phu hop voi trinh do nay
+    </div>
+
+    <div th:if="${not #lists.isEmpty(courses)}" class="table-wrap">
+        <table class="course-table">
+            <thead>
+            <tr>
+                <th>Ma khoa hoc</th>
+                <th>Ten khoa hoc</th>
+                <th>Level</th>
+                <th>Hoc phi</th>
+                <th>Khai giang</th>
+                <th>Trang thai</th>
+                <th>Hoc vien</th>
+                <th>Thao tac</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.code}"></td>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.level}"></td>
+                <td th:text="${#numbers.formatDecimal(course.fee, 0, 'POINT', 0, 'COMMA') + ' VNĐ'}"></td>
+                <td th:text="${course.startDate}"></td>
+                <td>
+                    <span class="status-pill" th:text="${course.status}"></span>
+                </td>
+                <td th:text="${course.studentCount + '/' + course.capacity}"></td>
+                <td>
+                    <div class="actions">
+                        <a class="link-button" th:href="@{/course/detail/{code}(code=${course.code})}">Chi tiet</a>
+                        <a class="link-button secondary" th:href="@{/course/edit/{id}(id=${course.id})}">Cap nhat</a>
+                        <form th:action="@{/course/delete/{id}(id=${course.id})}" method="post">
+                            <button class="danger" type="submit">Huy khoa hoc</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

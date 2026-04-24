@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<body>
+<section layout:fragment="content" class="content-stack">
+    <div class="page-heading">
+        <div>
+            <h1>Cap nhat khoa hoc</h1>
+            <p th:text="${course.name + ' - ' + course.code}">Course heading</p>
+        </div>
+    </div>
+
+    <form class="edit-form" th:action="@{/course/update}" th:object="${course}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{code}">
+        <input type="hidden" th:field="*{name}">
+        <input type="hidden" th:field="*{level}">
+        <input type="hidden" th:field="*{description}">
+        <input type="hidden" th:field="*{instructor}">
+        <input type="hidden" th:field="*{duration}">
+        <input type="hidden" th:field="*{studentCount}">
+        <input type="hidden" th:field="*{capacity}">
+
+        <div class="field">
+            <label>Hoc phi</label>
+            <input type="number" min="0" step="100000" th:field="*{fee}" required>
+        </div>
+
+        <div class="field">
+            <label>Ngay khai giang</label>
+            <input type="date" th:field="*{startDate}" required>
+        </div>
+
+        <div class="field">
+            <label>Trang thai lop</label>
+            <select th:field="*{status}">
+                <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}"></option>
+            </select>
+        </div>
+
+        <div class="inline-actions">
+            <button type="submit">Luu thay doi</button>
+            <a class="link-button secondary" th:href="@{/course/list}">Huy</a>
+        </div>
+    </form>
+</section>
+</body>
+</html>

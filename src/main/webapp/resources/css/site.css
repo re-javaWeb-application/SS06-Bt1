@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.app-shell {
+    min-height: 100vh;
+}
+
+.topbar {
+    background: #123c69;
+    color: #ffffff;
+    padding: 24px 40px 18px;
+}
+
+.brand {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.slogan {
+    margin: 6px 0 0;
+    color: #d7e7ff;
+}
+
+.navbar {
+    display: flex;
+    gap: 12px;
+    padding: 14px 40px;
+    background: #ffffff;
+    border-bottom: 1px solid #dbe4f0;
+}
+
+.navbar a {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #34506f;
+}
+
+.navbar a.active,
+.navbar a:hover {
+    background: #e9f1fb;
+    color: #123c69;
+}
+
+.page-content {
+    padding: 32px 40px 48px;
+}
+
+.content-stack {
+    display: grid;
+    gap: 20px;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: #526174;
+}
+
+.filter-panel,
+.edit-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #dbe4f0;
+    border-radius: 8px;
+}
+
+.field {
+    display: grid;
+    gap: 8px;
+}
+
+.field label {
+    font-weight: 600;
+}
+
+.field input,
+.field select,
+button,
+.link-button {
+    min-height: 42px;
+    border-radius: 8px;
+    border: 1px solid #c4d2e3;
+    font: inherit;
+}
+
+.field input,
+.field select {
+    padding: 0 12px;
+    background: #ffffff;
+}
+
+.action-field {
+    align-self: end;
+}
+
+button,
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    background: #1d4ed8;
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+}
+
+.link-button.secondary,
+button.danger {
+    background: #ffffff;
+    color: #1f2937;
+}
+
+button.danger {
+    border-color: #f1b7b7;
+    color: #b42318;
+}
+
+.table-wrap,
+.info-card {
+    background: #ffffff;
+    border: 1px solid #dbe4f0;
+    border-radius: 8px;
+}
+
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.course-table th,
+.course-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5edf6;
+    text-align: left;
+    vertical-align: top;
+}
+
+.course-table th {
+    background: #f8fbff;
+    font-size: 14px;
+}
+
+.actions,
+.inline-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.actions form {
+    margin: 0;
+}
+
+.status-pill,
+.badge-full {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.status-pill {
+    background: #e7f0ff;
+    color: #174ea6;
+}
+
+.badge-full {
+    background: #fee4e2;
+    color: #b42318;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+}
+
+.info-card {
+    padding: 22px;
+}
+
+.info-card h2 {
+    margin-top: 0;
+}
+
+.detail-list {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+}
+
+.detail-list div {
+    display: grid;
+    gap: 4px;
+}
+
+.detail-list dt {
+    font-weight: 700;
+}
+
+.detail-list dd {
+    margin: 0;
+    color: #526174;
+}
+
+.alert,
+.empty-state {
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.alert.success {
+    background: #e8f7ec;
+    color: #166534;
+}
+
+.alert.error {
+    background: #feeceb;
+    color: #b42318;
+}
+
+.empty-state {
+    background: #ffffff;
+    border: 1px dashed #c4d2e3;
+    color: #526174;
+}
+
+@media (max-width: 900px) {
+    .page-content,
+    .topbar,
+    .navbar {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .course-table {
+        min-width: 960px;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+}

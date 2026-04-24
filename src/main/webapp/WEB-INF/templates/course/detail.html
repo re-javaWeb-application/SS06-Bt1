@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/main-layout}">
+<body>
+<section layout:fragment="content" class="content-stack">
+    <div class="page-heading">
+        <div>
+            <h1 th:text="${course.name}">Course name</h1>
+            <p th:text="${course.code + ' - ' + course.level}">Course code</p>
+        </div>
+        <span th:if="${course.full}" class="badge-full">HET CHO</span>
+    </div>
+
+    <div class="detail-grid">
+        <article class="info-card">
+            <h2>Lo trinh hoc</h2>
+            <p th:text="${course.description}"></p>
+        </article>
+        <article class="info-card">
+            <h2>Thong tin lop</h2>
+            <dl class="detail-list">
+                <div>
+                    <dt>Giang vien</dt>
+                    <dd th:text="${course.instructor}"></dd>
+                </div>
+                <div>
+                    <dt>Thoi luong</dt>
+                    <dd th:text="${course.duration}"></dd>
+                </div>
+                <div>
+                    <dt>Hoc phi</dt>
+                    <dd th:text="${#numbers.formatDecimal(course.fee, 0, 'POINT', 0, 'COMMA') + ' VNĐ'}"></dd>
+                </div>
+                <div>
+                    <dt>Ngay khai giang</dt>
+                    <dd th:text="${course.startDate}"></dd>
+                </div>
+                <div>
+                    <dt>Trang thai</dt>
+                    <dd th:text="${course.status}"></dd>
+                </div>
+            </dl>
+        </article>
+    </div>
+
+    <div class="inline-actions">
+        <a class="link-button" th:href="@{/course/list}">Quay lai danh sach</a>
+        <a class="link-button secondary" th:href="@{/course/edit/{id}(id=${course.id})}">Cap nhat khoa hoc</a>
+    </div>
+</section>
+</body>
+</html>

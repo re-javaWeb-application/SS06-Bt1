@@ -1,0 +1,19 @@
+@startuml
+title Luong 4 - Cap nhat khoa hoc theo PRG
+
+participant "Nhan vien hoc vu" as User
+participant "Edit View" as View
+participant "CourseController" as Ctrl
+participant "CourseService" as Svc
+participant "CourseRepository" as Repo
+
+User -> View : Sua hoc phi, ngay khai giang, trang thai
+View -> Ctrl : POST /course/update
+Ctrl -> Svc : updateCourse(courseForm)
+Svc -> Repo : update(existingCourse)
+Repo --> Svc : Da cap nhat
+Svc --> Ctrl : Thanh cong
+Ctrl --> View : redirect:/course/list
+View --> User : Danh sach moi, khong gui lai form khi F5
+
+@enduml
